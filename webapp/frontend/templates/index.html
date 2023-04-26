@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Chat with Health Helper</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap">
+  </head>
+  <body>
+    <div class="chat-container">
+      <div class="chat-header">
+        <h1>Chat with Health Helper</h1>
+      </div>
+      <div class="chat-body">
+        <div class="chat-message bot-message">
+          <p>Hello! How can I assist you today?</p>
+        </div>
+      </div>
+      <div class="chat-footer">
+          <input type="text" id="chat-input" placeholder="Type your message...">
+          <button type="submit" id="send-button">Send</button>
+      </div>
+    </div>
+    <script src="{% static 'js/chat.js' %}"></script>
+  </body>
+</html>
