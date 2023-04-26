@@ -5,7 +5,7 @@ const chatInput = document.getElementById('chat-input');
 const sendButton = document.getElementById('send-button');
 
 // Создаем WebSocket объект
-const socket = new WebSocket('ws://localhost:8000');
+const socket = new WebSocket('ws://' + window.location.host);
 
 // Отправляем сообщение по WebSocket при нажатии на кнопку отправки
 sendButton.addEventListener('click', () => {
