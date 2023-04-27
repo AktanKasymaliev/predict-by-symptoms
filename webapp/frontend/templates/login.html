@@ -1,0 +1,21 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap">
+  </head>
+  <body>
+    <div class="container">
+      <h2>Login</h2>
+      <form method="post">
+        {% csrf_token %}
+        {{ form.as_p}}
+        <button type="submit">Login</button>
+      </form>
+      <a href="{% url 'register' %}" class="register-link">If you don't have an account - Register</a>
+    </div>
+  </body>
+</html>
