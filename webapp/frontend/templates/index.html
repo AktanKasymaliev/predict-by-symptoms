@@ -11,6 +11,9 @@
     <div class="chat-container">
       <div class="chat-header">
         <h1>Chat with Health Helper</h1>
+        <div class="button-container">
+          <a class="logout-link" href="{% url 'logout' %}">Logout of account</a>
+        </div>
       </div>
       <div class="chat-body">
         <div class="chat-message bot-message">
@@ -23,5 +26,16 @@
       </div>
     </div>
     <script src="{% static 'js/chat.js' %}"></script>
+    <script>
+      const inputElement = document.getElementById("chat-input");
+      const buttonElement = document.getElementById("send-button");
+
+      inputElement.addEventListener("keydown", function(event) {
+        if (event.keyCode === 13) {
+          event.preventDefault();
+          buttonElement.click();
+        }
+      });
+    </script>
   </body>
 </html>

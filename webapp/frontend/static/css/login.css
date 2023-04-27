@@ -1,47 +1,59 @@
 body {
-background-color: #f5f7f6;
-font-family: 'Roboto', sans-serif;
-}
-.container {
-max-width: 400px;
-margin: 0 auto;
-padding: 20px;
-background-color: #fff;
-border-radius: 10px;
-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
-}
-h2 {
-text-align: center;
-color: #33691e;
-margin-bottom: 20px;
-}
-label {
-display: block;
-margin-bottom: 5px;
-color: #33691e;
-}
-input {
+    background-color: #f5f7f6;
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
+  }
+  
+  h2 {
+    text-align: center;
+    color: #33691e;
+    margin-bottom: 20px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+    color: #33691e;
+  }
+  
+  input {
     width: 90%;
     padding: 10px;
     margin-bottom: 20px;
     border-radius: 5px;
     border: none;
     box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
-}
-button[type=submit] {
-background-color: #4caf50;
-color: #fff;
-border: none;
-border-radius: 5px;
-padding: 10px 20px;
-cursor: pointer;
-}
-button[type=submit]:hover {
-background-color: #388e3c;
-}
-.register-link {
+  }
+  
+  button[type=submit] {
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
+  button[type=submit]:hover {
+    background-color: #388e3c;
+  }
+  
+  .register-link {
     display: block;
     text-align: center;
     margin-top: 20px;
     color: #33691e;
   }
+  

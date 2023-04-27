@@ -17,6 +17,23 @@ color: #fff;
 padding: 10px;
 border-top-left-radius: 5px;
 border-top-right-radius: 5px;
+display: flex;
+}
+
+.logout-link {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #c62828;
+  color: #fff;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.2s ease-in-out;
+}
+.logout-link:hover {
+  background-color: #b71c1c;
+}
+.button-container {
+  margin-left: auto;
 }
 
 .chat-header h1 {
@@ -51,7 +68,7 @@ border-bottom-right-radius: 5px;
 }
 
 #chat-input {
-width: 70%;
+width: 90%;
 padding: 10px;
 border: none;
 border-radius: 5px;

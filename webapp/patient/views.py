@@ -1,6 +1,6 @@
 from django.views import generic
 from django.contrib.auth import authenticate, login
-
+from django.contrib.auth.views import LogoutView
 
 from patient.forms import RegisterForm, LoginForm
 from patient.models import Patient
@@ -22,10 +22,11 @@ class LoginView(generic.FormView):
     def post(self, request, *args, **kwargs):
         email = request.POST.get("email")
         password = request.POST.get("password")
-        print(email, password)
         user = authenticate(request, email=email, password=password)
-        print(user)
         if user:
             login(request, user)
             return super(LoginView, self).post(request, *args, **kwargs)
         return super(LoginView, self).post(request, *args, **kwargs)
+
+class LogoutView(LogoutView):
+    next_page = "/patient/login/"
