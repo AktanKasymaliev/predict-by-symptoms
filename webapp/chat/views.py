@@ -6,5 +6,4 @@ class ChatView(LoginRequiredMixin, TemplateView):
     login_url = 'patient/login/'
 
     def get(self, request, *args, **kwargs):
-        print(request.user)
         return super(ChatView, self).get(request, *args, **kwargs)

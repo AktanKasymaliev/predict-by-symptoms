@@ -21,7 +21,7 @@ sendButton.addEventListener('click', () => {
 function addMessageToChat(sender, message) {
   const messageElem = document.createElement('div');
   messageElem.classList.add('chat-message');
-  if (sender === 'bot') {
+  if (sender === 'Bot') {
     messageElem.classList.add('bot-message');
   }
   messageElem.innerHTML = `<p><strong>${sender}: </strong>${message}</p>`;
@@ -30,8 +30,8 @@ function addMessageToChat(sender, message) {
 
 // Обрабатываем сообщения от WebSocket
 socket.addEventListener('message', event => {
-  const message = event.data;
-  addMessageToChat('Bot', message);
+  const response = JSON.parse(event.data);
+  addMessageToChat(response['username'], response['message']);
 });
 
 // Обрабатываем закрытие соединения WebSocket

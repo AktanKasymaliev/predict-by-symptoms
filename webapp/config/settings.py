@@ -31,8 +31,7 @@ INSTALLED_APPS = [
 
     "chat",
     "patient",
-
-    "channels"
+    "chat.chatbot",
 ]
 
 MIDDLEWARE = [
@@ -138,4 +137,12 @@ CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels.layers.InMemoryChannelLayer"
         }
+    }
+
+OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
+PROCESSE_DATA_PATH = os.path.abspath("../cleaned_data/ProcessedData.csv")
+DATASET_PATH = os.path.abspath("../dataset")
+CSV_READING_ARGS  = {
+    "delimiter": ",",
+    "quotechar": '"',
     }
