@@ -31,6 +31,7 @@ function addMessageToChat(sender, message) {
 // Обрабатываем сообщения от WebSocket
 socket.addEventListener('message', event => {
   const response = JSON.parse(event.data);
+  console.log(response);
   addMessageToChat(response['username'], response['message']);
 });
 

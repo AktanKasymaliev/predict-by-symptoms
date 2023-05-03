@@ -5,6 +5,7 @@ from langchain.prompts import (
     SystemMessagePromptTemplate,
 )
 
+
 def get_intent_prompt():
     INTENT_EXAMPLES = [
         {"input": "Hey, I have a headache", "intent": "symptom"},
@@ -45,19 +46,20 @@ def get_intent_prompt():
 
 def get_chat_prompt():
     template = """
-    You are bot who talks like human and you can answer only for medical questions. 
-    If there is no information but intent==symptom, try to make answer by yourself, 
-    But if you don't know, say that you don't know.
-    If there are several 'Supposed diagnosis' and 'Helpful Answer', list all them what diseases may be.
+    You are bot who talks like human and you can answer only for medical questions.
+    But if you don't know, say that you don't know.  Without greetings and etc
+    Use the following portion of a long dataset and information about person to see if any of the text is relevant to answer the question. 
+    ALWAYS suggest which doctor the patient should go to based on the dataset
 
-    Use and humanize the following pieces of information to make a diagnosis
-    and reply to patient:
+    Retell briefly in human-understandable language to the patient using this dataset from the Python programming language
+    and reply to patient.
+        Question or complains of patient: {complain}
+        About person: {person}
         Intent: {intent}
-        Helpful Answer: {answer}
-        Supposed diagnosis: {focus}
+        Your dataset for patient's related question: {dataset}
+    Your answer:
     """
-
     return PromptTemplate(
-        input_variables=["answer", "focus", "intent"],
+        input_variables=["dataset", "intent", "complain", "person"],
         template=template,
     )
