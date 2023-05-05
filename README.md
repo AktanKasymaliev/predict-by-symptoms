@@ -1,4 +1,4 @@
-# Seasoned Care
+# Predict by symptoms
 
 Chat bot
 
