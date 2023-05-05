@@ -14,6 +14,7 @@ from .chatbot.utils import (
     init_vector_retriever, get_data_from_vectorstore
     )
 from .chatbot.schemas import Chat
+from .chatbot.callbacks import StreamingLLMCallbackHandler
 
 @sync_to_async
 def get_health_data(user):
@@ -39,6 +40,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
         self.room_name = await generate_room_name(20)
         self.room_group_name = f'chat_{self.room_name}'
         self.health_data = await get_health_data(self.scope["user"])
+        # self.stream_callback = StreamingLLMCallbackHandler(self)
         # Join room
         await self.channel_layer.group_add(
             self.room_group_name,
@@ -95,7 +97,6 @@ class ChatConsumer(AsyncWebsocketConsumer):
             person=self.health_data,
             intent="symptom"
         )
-
         en_response = Chat(username="Bot", message=answer_to_patient, type="stream")
         await self.send(text_data=json.dumps(en_response.dict()))
 
@@ -106,5 +107,5 @@ class ChatConsumer(AsyncWebsocketConsumer):
         If you feel bad, please, tell me about your symptoms, I will try to help you.
         Or rephrase your question.
         """
-        response = Chat(username="Bot", message=text, type="stream")
+        response = Chat(username="Bot", message=text, type="info")
         await self.send(text_data=json.dumps(response.dict()))

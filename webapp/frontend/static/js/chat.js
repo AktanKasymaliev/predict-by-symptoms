@@ -12,27 +12,43 @@ sendButton.addEventListener('click', () => {
   const message = chatInput.value;
   if (message) {
     socket.send(message);
-    addMessageToChat('You', message);
+    addMessageToChat('You', "stream", message);
     chatInput.value = '';
   }
 });
 
 // Добавляем сообщение в чат
-function addMessageToChat(sender, message) {
+function addMessageToChat(sender, type, message) {
   const messageElem = document.createElement('div');
   messageElem.classList.add('chat-message');
-  if (sender === 'Bot') {
+  if (sender === "Bot") {
     messageElem.classList.add('bot-message');
+    messageElem.innerHTML = `<p>
+                                  <strong>Bot: </strong>
+                              </p>`;
+    if (type === "info" || type === "stream") {
+      let messages = message.split(' ');
+      let i = 0;
+      const intervalId = setInterval(() => {
+        if (i < messages.length) {
+          messageElem.lastChild.textContent += messages[i] + " ";
+          i++;
+        } else {
+          clearInterval(intervalId);
+        }
+      }, 100);  
+    } 
+  } else  {
+    messageElem.innerHTML = `<p><strong>${sender}: </strong>${message}</p>`;
   }
-  messageElem.innerHTML = `<p><strong>${sender}: </strong>${message}</p>`;
   chatBody.appendChild(messageElem);
-}
+};
 
 // Обрабатываем сообщения от WebSocket
 socket.addEventListener('message', event => {
   const response = JSON.parse(event.data);
   console.log(response);
-  addMessageToChat(response['username'], response['message']);
+  addMessageToChat(response['username'],response['type'], response['message']);
 });
 
 // Обрабатываем закрытие соединения WebSocket
