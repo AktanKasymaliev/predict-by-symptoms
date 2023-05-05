@@ -4,6 +4,7 @@ import json
 
 from asgiref.sync import sync_to_async
 from channels.generic.websocket import AsyncWebsocketConsumer
+from langchain.memory import ConversationBufferMemory
 
 from .chatbot.prompts import get_intent_prompt
 from .chatbot.chains import (
@@ -37,6 +38,8 @@ def generate_room_name(length):
 class ChatConsumer(AsyncWebsocketConsumer):
     
     async def connect(self):
+        self.memory = ConversationBufferMemory()
+        self.chat_history = []
         self.room_name = await generate_room_name(20)
         self.room_group_name = f'chat_{self.room_name}'
         self.health_data = await get_health_data(self.scope["user"])
@@ -91,12 +94,17 @@ class ChatConsumer(AsyncWebsocketConsumer):
         remastred_q = await q_chain.arun(question=question)
         dataset = await sync_to_async(get_data_from_vectorstore)(self.retriever, remastred_q)
         ans_chain = await sync_to_async(get_answer_chain)()
+        question = (
+            f"Original question: {message}.\nPatient health data: {self.health_data}"
+        )
         answer_to_patient = await ans_chain.arun(
             dataset=dataset,
             complain=message,
             person=self.health_data,
-            intent="symptom"
+            intent="symptom",
+            chat_history=self.chat_history,
         )
+        self.chat_history.append((question, answer_to_patient))
         en_response = Chat(username="Bot", message=answer_to_patient, type="stream")
         await self.send(text_data=json.dumps(en_response.dict()))
 

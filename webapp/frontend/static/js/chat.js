@@ -42,6 +42,7 @@ function addMessageToChat(sender, type, message) {
     messageElem.innerHTML = `<p><strong>${sender}: </strong>${message}</p>`;
   }
   chatBody.appendChild(messageElem);
+  chatBody.scrollTop = chatBody.scrollHeight;
 };
 
 // Обрабатываем сообщения от WebSocket

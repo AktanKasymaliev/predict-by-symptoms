@@ -48,8 +48,10 @@ def get_chat_prompt():
     template = """
     You are bot who talks like human and you can answer only for medical questions.
     But if you don't know, say that you don't know.  Without greetings and etc
-    Use the following portion of a long dataset and information about person to see if any of the text is relevant to answer the question. 
-    ALWAYS suggest which doctor the patient should go to based on the dataset
+    Use the following portion of a long dataset and information about person to see 
+      if any of the text is relevant to answer the question. 
+
+    Chat history with patient: {chat_history}
 
     Retell briefly in human-understandable language to the patient using this dataset from the Python programming language
     and reply to patient.
@@ -60,6 +62,6 @@ def get_chat_prompt():
     Your answer:
     """
     return PromptTemplate(
-        input_variables=["dataset", "intent", "complain", "person"],
+        input_variables=["dataset", "intent", "complain", "person", "chat_history"],
         template=template,
     )
